@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery | Home{% endblock %}
+
+{% block body %}
+<main>
+    <section class="section section-create-deliverer">
+        <div class="container">  
+            <h5 class="mb-8">
+                <span>Create new Deliverer</span>
+            </h5>
+            
+            <form action="{{ path("deliverer-home") }}" method="POST" class="mt-4">
+                <div class="row items-center">
+                    <div class="input-field">
+                        <input type="text" name="name">
+                        <label for="name">Deliverer</label>
+                    </div>
+                    <div class="submit-field">
+                        <button class="btn deep-purple darken-2 waves-effect waves-light" type="submit" name="action">
+                            <span class="font-w-5">Create</span>
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <section class="section section-deliverer">
+        <div class="container">
+            <table class="striped highlight">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Name</th>
+                        <th>Last</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for deliverer in deliverers %}
+                        <tr>
+                            <td>{{ deliverer.id }}</td>
+                            <td>{{ deliverer.name }}</td>
+                            <td>Last Rent</td>
+                            <td>
+                                <div class="row m-0">
+                                    <div class="input-field col s6 m-0 ">
+                                        <form action="{{ path("deliverer-home") }}" method="POST" class="grid white ">
+                                            <input type="hidden" name="deliverer" value="{{ deliverer.id }}">
+
+                                            <select name="select">
+                                                <option value="0" disabled selected>Choose your option</option>
+                                                {% for vehicle_option in vehicle_options %}
+                                                    <option value="{{ vehicle_option.id }}">{{ vehicle_option.vehicle }}</option>
+                                                {% endfor %}
+                                            </select>        
+
+                                            <button type="submit" name="save" class="btn font-w-5 waves-effect waves-light deep-purple darken-2">Zaduzi vozilo</button>      
+                                        </form>                  
+                                    </div>
+                                    <div class="col s6">
+                                        <a href="{{ path("deliverer-history", {'id': deliverer.id }) }}" class="btn font-w-5 waves-effect waves-light brown accent-4">Istorija</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>
+                                <p>U bazi nema dostavljaca.</p>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% set route = app.request.get('_route') %}
+
+<div class="navbar-fixed">
+    <nav class="deep-purple darken-2">
+        <div class="container nav-wrapper">
+            <a href="{{ path("deliverer-home") }}" class="brand-logo">Glovo</a>
+            
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="{{ path("deliverer-home") }}" class="waves-effect waves-light {{ 'deliverer-home' in route ? 'active' }}">Deliverer</a>
+                </li>
+                <li>
+                    <a href="{{ path("vehicle-home") }}" class="waves-effect waves-light {{ 'vehicle-home'  in route ? 'active' }}">Vehicle</a>
+                </li>
+                <li>
+                    <a href="{{ path("rents-home") }}" class="waves-effect waves-light {{ 'rents-home' in route ? 'active' }}">Rent</a>
+                </li>                
+            </ul>
+        </div>
+    </nav>
+</div>

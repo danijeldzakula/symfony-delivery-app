@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery | Deliverer Rents{% endblock %}
+
+{% block body %}
+<main>    
+    <section class="section section-deliverer-rents">
+        <div class="container">  
+            <h4 class="text-center mb-8">History of Vehicle!</h4>
+
+            
+            <div class="row">
+                {% for vehicle_rent in vehicle_rents %}
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="https://picsum.photos/id/995/500/400">
+                                <span class="card-title">{{ vehicle_rent.deliverer.name }}</span>
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    <strong class="deep-purple-text darken-2">{{ vehicle_rent.deliverer.name }}</strong>
+                                    <span>je zaduzio/la vozilo</span>
+                                    <strong class="deep-purple-text darken-2">{{ vehicle_rent.vehicle.vehicle }}</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>          
+                {% else %}
+                    <div class="p-4 text-center">
+                        <h5 class="mb-8">Ovo vozilo nije zaduzeno!</h5>
+                        <a href="{{ path("deliverer-home") }}" class="link">
+                            <strong>Back to Home</strong>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

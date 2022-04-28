@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery | Rent{% endblock %}
+
+{% block body %}
+<main>    
+    <section class="section section-rent">
+        <div class="container">
+            <h4 class="text-center mb-8">History of Rents!</h4>
+
+            <ul class="collection with-header">
+                {% for rent in rents %}          
+                    <li class="collection-item">
+                        <div>
+                            <span>#ID: {{ rent.deliverer.id}} - Name: {{ rent.deliverer.name}} je zaduzio vozilo {{ rent.vehicle.vehicle }}</span>
+
+                            <a href="{{ path("deliverer-history", {'id': rent.deliverer.id }) }}" class="secondary-content deep-purple-text darken-2">
+                                <i class="material-icons">send</i>
+                            </a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="collection-item">
+                        <h5>Ne postoji zaduzenje vozila.</h5>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</main>
+{% endblock %}

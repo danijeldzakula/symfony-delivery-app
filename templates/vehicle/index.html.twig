@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery | Vehicles{% endblock %}
+
+{% block body %}
+<main>    
+    <section class="section section-create-vehicle">
+        <div class="container">
+  
+            <h5 class="mb-8">
+                <span>Create new Vehicle</span>
+            </h5>
+            
+            <form action="{{ path("vehicle-home") }}" method="POST" class="mt-4">
+                <div class="row items-center">
+                    <div class="input-field">
+                        <input type="text" name="name">
+                        <label for="name">Vehicle</label>
+                    </div>
+                    <div class="submit-field">
+                        <button class="btn deep-purple darken-2 waves-effect waves-light" type="submit" name="action">
+                            <span class="font-w-5">Create</span>
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section section-vehicle">
+        <div class="container">
+            <table class="striped highlight">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vehicle in vehicles %}
+                        <tr>
+                            <td>{{ vehicle.id }}</td>
+                            <td>{{ vehicle.vehicle }}</td>
+                            <td>
+                                <a href="{{ path("rents-vehicle", {'id': vehicle.id }) }}" class="btn font-w-5 waves-effect waves-light brown accent-4">Istorija zaduzenja</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>
+                                <p>U bazi nema vozila</p>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>                            
+                    {% endfor %}
+                </tbody>
+            </table>            
+        </div>
+    </section>
+</main>
+{% endblock %}
